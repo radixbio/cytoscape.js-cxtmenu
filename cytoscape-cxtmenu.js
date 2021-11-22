@@ -206,6 +206,11 @@ var cxtmenu = function cxtmenu(params) {
 
       if (command.disabled === true || command.enabled === false) {
         content.setAttribute('class', 'cxtmenu-content cxtmenu-disabled');
+      } else if (typeof command.enabled === 'function') {
+        var enabled = command.enabled.apply(target, [target]);
+        if (!enabled) {
+          content.setAttribute('class', 'cxtmenu-content cxtmenu-disabled');
+        }
       }
 
       parent.appendChild(item);
